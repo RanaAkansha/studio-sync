@@ -10,12 +10,17 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+const cors = require("cors");
 
-app.get("/", (req, res) => {
-  res.json({ message: "StudioSync API is running" });
-});
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://studio-sync-kappa.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
