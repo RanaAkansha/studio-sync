@@ -13,14 +13,23 @@ const addComment = async (req, res) => {
       });
     }
 
-    const project = await pool.query(
+    const projectRes = await pool.query(
       "SELECT * FROM projects WHERE id=$1",
       [project_id]
     );
 
-    if (project.rows.length === 0) {
+    if (projectRes.rows.length === 0) {
       return res.status(404).json({
         message: "Project not found.",
+      });
+    }
+
+    const project = projectRes.rows[0];
+    const userRole = req.user.role;
+
+    if (userRole !== "admin" && project.client_id !== userId) {
+      return res.status(403).json({
+        message: "You are not authorized to access this project.",
       });
     }
 
@@ -53,9 +62,24 @@ const getComments = async (req, res) => {
   try {
 
     const { projectId } = req.params;
+    const userId = req.user.id;
+    const userRole = req.user.role;
+
+    // Check project authorization first
+    const projectRes = await pool.query("SELECT * FROM projects WHERE id = $1", [projectId]);
+    if (projectRes.rows.length === 0) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    const project = projectRes.rows[0];
+    if (userRole !== "admin" && project.client_id !== userId) {
+      return res.status(403).json({
+        message: "You are not authorized to view comments for this project.",
+      });
+    }
 
     const result = await pool.query(
-      `SELECT comments.*, users.name
+      `SELECT comments.*, users.name, users.role AS user_role
        FROM comments
        JOIN users
        ON comments.user_id = users.id
@@ -77,7 +101,40 @@ const getComments = async (req, res) => {
   }
 };
 
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+    const userRole = req.user.role;
+
+    // Find the comment first
+    const commentRes = await pool.query("SELECT * FROM comments WHERE id = $1", [id]);
+    if (commentRes.rows.length === 0) {
+      return res.status(404).json({ message: "Comment not found" });
+    }
+
+    const comment = commentRes.rows[0];
+
+    // Admin can delete any comment; Client can only delete their own
+    if (userRole !== "admin" && comment.user_id !== userId) {
+      return res.status(403).json({
+        message: "You are not authorized to delete this comment",
+      });
+    }
+
+    await pool.query("DELETE FROM comments WHERE id = $1", [id]);
+
+    res.status(200).json({
+      message: "Comment deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete comment error:", error.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   addComment,
   getComments,
+  deleteComment,
 };

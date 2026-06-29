@@ -7,10 +7,11 @@ const { protect } = require("../middleware/authMiddleware");
 const {
   uploadDeliverable,
   getDeliverables,
+  deleteDeliverable,
 } = require("../controllers/deliverableController");
 
 router.post("/", protect, uploadDeliverable);
-
-router.get("/:projectId", protect, getDeliverables);
+router.get("/", protect, getDeliverables);
+router.delete("/:id", protect, deleteDeliverable);
 
 module.exports = router;
