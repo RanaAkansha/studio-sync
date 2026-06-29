@@ -20,6 +20,12 @@ app.use(
   })
 );
 
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json({ message: "StudioSync API is running" });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/projects", projectRoutes);
