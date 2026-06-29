@@ -141,26 +141,50 @@ function Login() {
                             {submitting ? "Signing in..." : "Sign in"}
                         </button>
 
-                        <div className="mt-6 border-t pt-5">
-                            <p className="text-sm font-medium mb-3">Demo Accounts</p>
+                        <div className="mt-8 border border-gray-200 rounded-lg p-4 bg-gray-50">
 
-                            <div className="space-y-2">
-                                <button
-                                    type="button"
-                                    onClick={fillAdmin}
-                                    className="w-full border rounded-lg py-2 hover:bg-gray-50"
-                                >
-                                    Login as Agency Admin
-                                </button>
+                            <h3 className="text-sm font-semibold text-gray-900 mb-4">
+                                Demo Accounts
+                            </h3>
 
-                                <button
-                                    type="button"
-                                    onClick={fillClient}
-                                    className="w-full border rounded-lg py-2 hover:bg-gray-50"
-                                >
-                                    Login as Client
-                                </button>
+                            <div className="space-y-4">
+
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium">Agency Admin</p>
+                                        <p className="text-xs text-gray-500">
+                                            stephen@studio137.co.za
+                                        </p>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        onClick={fillAdmin}
+                                        className="text-sm px-3 py-1.5 border rounded-md hover:bg-white"
+                                    >
+                                        Use
+                                    </button>
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium">Client</p>
+                                        <p className="text-xs text-gray-500">
+                                            client@wineandco.co.za
+                                        </p>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        onClick={fillClient}
+                                        className="text-sm px-3 py-1.5 border rounded-md hover:bg-white"
+                                    >
+                                        Use
+                                    </button>
+                                </div>
+
                             </div>
+
                         </div>
 
                     </form>
