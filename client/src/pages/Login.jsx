@@ -9,6 +9,19 @@ function Login() {
     const { login } = useAuth();
 
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const fillAdmin = () => {
+        setFormData({
+            email: "stephen@studio137.co.za",
+            password: "admin123",
+        });
+    };
+
+    const fillClient = () => {
+        setFormData({
+            email: "client@wineandco.co.za",
+            password: "client123",
+        });
+    };
     const [error, setError] = useState("");
     const [submitting, setSubmitting] = useState(false);
 
@@ -127,6 +140,28 @@ function Login() {
                         >
                             {submitting ? "Signing in..." : "Sign in"}
                         </button>
+
+                        <div className="mt-6 border-t pt-5">
+                            <p className="text-sm font-medium mb-3">Demo Accounts</p>
+
+                            <div className="space-y-2">
+                                <button
+                                    type="button"
+                                    onClick={fillAdmin}
+                                    className="w-full border rounded-lg py-2 hover:bg-gray-50"
+                                >
+                                    Login as Agency Admin
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={fillClient}
+                                    className="w-full border rounded-lg py-2 hover:bg-gray-50"
+                                >
+                                    Login as Client
+                                </button>
+                            </div>
+                        </div>
 
                     </form>
 
