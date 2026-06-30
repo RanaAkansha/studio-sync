@@ -20,7 +20,7 @@ async function seed() {
             INSERT INTO users (name, email, password, role)
             VALUES ($1, $2, $3, $4)
             RETURNING id
-        `, ["Stephen Diederichs", "stephen@studio137.co.za", adminPasswordHash, "admin"]);
+        `, ["Demo Admin", "admin@demoagency.com", adminPasswordHash, "admin"]);
         const adminId = adminRes.rows[0].id;
 
         // Insert Client
@@ -29,7 +29,7 @@ async function seed() {
             INSERT INTO users (name, email, password, role)
             VALUES ($1, $2, $3, $4)
             RETURNING id
-        `, ["Wine & Company Client", "client@wineandco.co.za", clientPasswordHash, "client"]);
+        `, ["Sample Brand Client", "client@samplebrand.com", clientPasswordHash, "client"]);
         const clientId = clientRes.rows[0].id;
 
         // Insert Project
@@ -39,8 +39,8 @@ async function seed() {
             VALUES ($1, $2, $3, $4, $5, NOW(), NOW())
             RETURNING id
         `, [
-            "Wine & Company E-Commerce Redesign", 
-            "Redesign and modernise the Wine & Company online store. Build custom Shopify sections, optimise checkout flow, and integrate booking widget.", 
+            "Sample Brand E-Commerce Redesign", 
+            "Redesign and modernise the Sample Brand online store. Build custom checkout sections, optimise product page flow, and integrate inventory widget.", 
             "Active", 
             clientId, 
             adminId
@@ -54,9 +54,9 @@ async function seed() {
             VALUES ($1, $2, $3, $4, $5, NOW())
         `, [
             projectId, 
-            "Shopify Booking Widget Configuration", 
-            "Setup guides and API keys for the reservation widget.", 
-            "https://docs.google.com/document/d/145YjqheAmDLCSmMXiVGj6NIgOV_UOlsYHLGK4BHvN3Y/edit?usp=drive_link", 
+            "E-Commerce Widget Configuration", 
+            "Setup guides and API keys for the inventory widget.", 
+            "https://docs.google.com/document/d/1a2b3c4d5e6f7g8h9i0j/edit?usp=drive_link", 
             adminId
         ]);
 
@@ -68,7 +68,7 @@ async function seed() {
         `, [
             projectId, 
             clientId, 
-            "Hi Stephen, could we review the latest checkout flow layouts? The custom Shopify section looks great so far."
+            "Hi Admin, could we review the latest checkout flow layouts? The custom section looks great so far."
         ]);
 
         await pool.query(`

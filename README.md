@@ -1,6 +1,6 @@
 # StudioSync
 
-A modern, light, role-aware client collaboration portal built for digital agencies like **Studio137**. Replace scattered email chains, Google Drive links, and WhatsApp threads with a single unified dashboard for managing projects, client assets, and interactive feedback.
+A modern, light, role-aware client collaboration portal inspired by the workflow needs of small digital agencies. Replace scattered email chains, Google Drive links, and WhatsApp threads with a single unified dashboard for managing projects, client assets, and interactive feedback.
 
 ---
 
@@ -32,7 +32,7 @@ cd server
 npm install
 npm run seed
 ```
-> The seeder automatically drops old tables, runs migrations (if needed), and populates authentic demo data tailored to actual Studio137 projects (Wine & Company, Hermanus Whale Festival, etc.).
+> The seeder automatically drops old tables, runs migrations (if needed), and populates fictional demo data (projects, deliverables, comments) to showcase the agency workflow.
 
 ### 2. Run Backend Dev Server
 ```bash
@@ -52,17 +52,7 @@ Vite will start the client interface on `http://localhost:5173`.
 
 ## 🔐 Seeded Test Credentials
 
-To preview both roles instantly, log in with the following credentials after seeding:
-
-### 🛠️ Agency Admin Role
-- **Email**: `stephen@studio137.co.za`
-- **Password**: `admin123`
-*(Simulates the perspective of Stephen Diederichs managing multiple client accounts)*
-
-### 👤 Client Role
-- **Email**: `client@wineandco.co.za`
-- **Password**: `client123`
-*(Simulates the client view inspecting the "Wine & Company E-Commerce Redesign" project)*
+Run `npm run seed` to generate demo Admin and Client accounts — check `server/seed.js` for credentials.
 
 ---
 

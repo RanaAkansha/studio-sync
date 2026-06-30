@@ -69,7 +69,7 @@ function Register() {
 
                 <div>
                     <p className="text-gray-600 text-xs">
-                        Designed for agencies like Studio137.
+                        Designed for modern digital agencies.
                     </p>
                 </div>
             </div>

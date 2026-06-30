@@ -11,14 +11,14 @@ function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const fillAdmin = () => {
         setFormData({
-            email: "stephen@studio137.co.za",
+            email: "admin@demoagency.com",
             password: "admin123",
         });
     };
 
     const fillClient = () => {
         setFormData({
-            email: "client@wineandco.co.za",
+            email: "client@samplebrand.com",
             password: "client123",
         });
     };
@@ -153,7 +153,7 @@ function Login() {
                                     <div>
                                         <p className="text-sm font-medium">Agency Admin</p>
                                         <p className="text-xs text-gray-500">
-                                            stephen@studio137.co.za
+                                            admin@demoagency.com
                                         </p>
                                     </div>
 
@@ -170,7 +170,7 @@ function Login() {
                                     <div>
                                         <p className="text-sm font-medium">Client</p>
                                         <p className="text-xs text-gray-500">
-                                            client@wineandco.co.za
+                                            client@samplebrand.com
                                         </p>
                                     </div>
 
